@@ -7,8 +7,8 @@
 #define SERVO_3 33
 #define SERVO_4 32
 
-#define RX 27
+//#define RX 13
 
-#define PWM_IN 27
+#define PWM_IN 13
 
 #define NEOPIXEL 4

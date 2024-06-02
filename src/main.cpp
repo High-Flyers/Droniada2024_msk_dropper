@@ -11,7 +11,7 @@ uint8_t i = 0;
 
 void setup() {
     //WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
-    //Pwm::enable();
+    Pwm::enable();
     Dropper::attach();
     Dropper::arm();
     /*
@@ -22,7 +22,7 @@ void setup() {
 }
 
 void loop() {
-    /*
+    
     if (Pwm::isAvailable() && Pwm::checkTrigger()) {
         i++;
         Pwm::disable();
@@ -30,5 +30,5 @@ void loop() {
         delay(3000);
         Pwm::enable();
     }
-    */
+    
 }
