@@ -6,3 +6,5 @@
 
 #define LOCKED_SERVO_US 2000
 #define UNLOCKED_SERVO_US 1000
+
+#define LED_COUNT 24

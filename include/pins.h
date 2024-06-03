@@ -11,4 +11,10 @@
 
 #define PWM_IN 13
 
-#define NEOPIXEL 4
+#define NEOPIXEL1 14
+#define NEOPIXEL2 12
+#define NEOPIXEL3 5
+
+#define NEOPIXEL4 18
+#define NEOPIXEL5 19
+#define NEOPIXEL6 27

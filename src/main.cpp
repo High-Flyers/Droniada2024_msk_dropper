@@ -3,9 +3,10 @@
 #include "dropper.h"
 #include "pwm.h"
 #include "params.h"
+#include "neopixel.h"
 
-#include "soc/soc.h"
-#include "soc/rtc_cntl_reg.h"
+//#include "soc/soc.h"
+//#include "soc/rtc_cntl_reg.h"
 
 uint8_t i = 0;
 
@@ -14,6 +15,7 @@ void setup() {
     Pwm::enable();
     Dropper::attach();
     Dropper::arm();
+    Neopixel::init();
     /*
     Serial.begin(9600);
     while (!Serial) {
@@ -23,6 +25,8 @@ void setup() {
 
 void loop() {
     
+    Neopixel::animate();
+
     if (Pwm::isAvailable() && Pwm::checkTrigger()) {
         i++;
         Pwm::disable();

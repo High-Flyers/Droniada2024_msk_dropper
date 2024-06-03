@@ -10,6 +10,7 @@
             "includePath": [
                 "C:/Users/kacpe/Desktop/HF/zrzut/include",
                 "C:/Users/kacpe/Desktop/HF/zrzut/src",
+                "C:/Users/kacpe/Desktop/HF/zrzut/.pio/libdeps/kosiel_board_9000/Adafruit NeoPixel",
                 "C:/Users/kacpe/Desktop/HF/zrzut/.pio/libdeps/kosiel_board_9000/ESP32Servo/src",
                 "C:/Users/kacpe/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "C:/Users/kacpe/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
@@ -241,6 +242,7 @@
                 "path": [
                     "C:/Users/kacpe/Desktop/HF/zrzut/include",
                     "C:/Users/kacpe/Desktop/HF/zrzut/src",
+                    "C:/Users/kacpe/Desktop/HF/zrzut/.pio/libdeps/kosiel_board_9000/Adafruit NeoPixel",
                     "C:/Users/kacpe/Desktop/HF/zrzut/.pio/libdeps/kosiel_board_9000/ESP32Servo/src",
                     "C:/Users/kacpe/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "C:/Users/kacpe/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
