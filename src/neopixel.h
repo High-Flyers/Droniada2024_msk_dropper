@@ -7,4 +7,5 @@
 namespace Neopixel{
     void init();
     void animate();
+    void update(const uint64_t timeMs);
 }   

@@ -7,6 +7,9 @@ Adafruit_NeoPixel strip4(LED_COUNT, NEOPIXEL4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel strip5(LED_COUNT, NEOPIXEL5, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel strip6(LED_COUNT, NEOPIXEL6, NEO_GRB + NEO_KHZ800);
 
+uint16_t hsv = 0;
+auto color = Adafruit_NeoPixel::ColorHSV(hsv, 255, 255);
+
 void Neopixel::init(){
     strip1.begin();           
     strip1.show();            
@@ -33,7 +36,7 @@ void Neopixel::init(){
     strip6.setBrightness(50);
 }
 
-void Neopixel::animate(){
+void Neopixel::steady(){
     
     for(int i = 0; i < LED_COUNT; i++) { 
         strip1.setPixelColor(i, strip1.Color(255,   0,   0));        
@@ -55,5 +58,216 @@ void Neopixel::animate(){
         strip6.show();                        
         delay(50);                          
     }
+}
 
+void Neopixel::animate(const uint64_t timeMs) {
+    
+    static uint64_t prevTimeMs = timeMs;
+    static uint8_t pixNum = 0;
+    static uint8_t state = 0;
+
+    if (timeMs - prevTimeMs < BLINK_DEL_MS) {
+        return;
+    }
+
+    switch (state) {
+        case 0:
+            strip1.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip1.setBrightness(255);
+            strip1.show();
+
+            strip2.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip2.setBrightness(255);
+            strip2.show();
+
+            strip3.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip3.setBrightness(255);
+            strip3.show();
+
+            if (pixNum == LED_COUNT - 1) {
+                state++;
+                prevTimeMs = timeMs;
+                pixNum = 0;
+                break;
+            }
+
+            pixNum++;
+            prevTimeMs = timeMs;
+            break;
+
+        case 1:
+            strip4.setPixelColor(pixNum, color);
+            strip4.setBrightness(255);
+            strip4.show();
+
+            strip5.setPixelColor(pixNum, color);
+            strip5.setBrightness(255);
+            strip5.show();
+
+            strip6.setPixelColor(pixNum, color);
+            strip6.setBrightness(255);
+            strip6.show();
+
+            if (pixNum == LED_COUNT - 1) {
+                state++;
+                prevTimeMs = timeMs;
+                pixNum = 0;
+                break;
+            }
+
+            pixNum++;
+            prevTimeMs = timeMs;
+
+            break;
+
+        case 2:
+            if (timeMs - prevTimeMs > 300) {
+                strip1.clear();
+                strip2.clear();
+                strip3.clear();
+                strip4.clear();
+                strip5.clear();
+                strip6.clear();
+
+                strip1.show();
+                strip2.show();
+                strip3.show();
+                strip4.show();
+                strip5.show();
+                strip6.show();
+
+                prevTimeMs = timeMs;
+                state++;
+            }
+
+            break;
+
+        case 3:
+            if (timeMs - prevTimeMs > 600) {
+                prevTimeMs = timeMs;
+                state = 0;
+                hsv = (hsv + HSV_BUMP) % 65535;
+                color = Adafruit_NeoPixel::ColorHSV(hsv, 255, 255);
+            }
+
+            break;
+    }
+}
+
+void Neopixel::animate2(const uint64_t timeMs) {
+    
+    static uint64_t prevTimeMs = timeMs;
+    static uint8_t pixNum = 0;
+    static uint8_t state = 0;
+
+    if (timeMs - prevTimeMs < BLINK_DEL_MS) {
+        return;
+    }
+
+    switch (state) {
+        case 0:
+            strip1.setPixelColor(pixNum, color);
+            strip1.setBrightness(255);
+            strip1.show();
+
+            strip2.setPixelColor(pixNum, color);
+            strip2.setBrightness(255);
+            strip2.show();
+
+            strip3.setPixelColor(pixNum, color);
+            strip3.setBrightness(255);
+            strip3.show();
+
+            strip4.setPixelColor(pixNum, color);
+            strip4.setBrightness(255);
+            strip4.show();
+
+            strip5.setPixelColor(pixNum, color);
+            strip5.setBrightness(255);
+            strip5.show();
+
+            strip6.setPixelColor(pixNum, color);
+            strip6.setBrightness(255);
+            strip6.show();
+
+            if (pixNum == LED_COUNT - 1) {
+                state++;
+                prevTimeMs = timeMs;
+                pixNum = 0;
+                break;
+            }
+
+            pixNum++;
+            prevTimeMs = timeMs;
+
+            break;
+
+        case 1:
+            strip1.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip1.setBrightness(255);
+            strip1.show();
+
+            strip2.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip2.setBrightness(255);
+            strip2.show();
+
+            strip3.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip3.setBrightness(255);
+            strip3.show();
+
+            strip4.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip4.setBrightness(255);
+            strip4.show();
+
+            strip5.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip5.setBrightness(255);
+            strip5.show();
+
+            strip6.setPixelColor(LED_COUNT - 1 - pixNum, color);
+            strip6.setBrightness(255);
+            strip6.show();
+
+            if (pixNum == LED_COUNT - 1) {
+                state++;
+                prevTimeMs = timeMs;
+                pixNum = 0;
+                break;
+            }
+
+            pixNum++;
+            prevTimeMs = timeMs;
+            break;
+            
+        case 2:
+            if (timeMs - prevTimeMs > 300) {
+                strip1.clear();
+                strip2.clear();
+                strip3.clear();
+                strip4.clear();
+                strip5.clear();
+                strip6.clear();
+
+                strip1.show();
+                strip2.show();
+                strip3.show();
+                strip4.show();
+                strip5.show();
+                strip6.show();
+
+                prevTimeMs = timeMs;
+                state++;
+            }
+
+            break;
+
+        case 3:
+            if (timeMs - prevTimeMs > 600) {
+                prevTimeMs = timeMs;
+                state = 0;
+                hsv = (hsv + HSV_BUMP) % 65535;
+                color = Adafruit_NeoPixel::ColorHSV(hsv, 255, 255);
+            }
+
+            break;
+    }
 }

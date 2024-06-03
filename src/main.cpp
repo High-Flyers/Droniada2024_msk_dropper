@@ -10,6 +10,8 @@
 
 uint8_t i = 0;
 
+uint64_t currentMillis = 0;
+
 void setup() {
     //WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
     Pwm::enable();
@@ -25,14 +27,19 @@ void setup() {
 
 void loop() {
     
-    Neopixel::animate();
+    currentMillis = millis();
+
+    //Neopixel::steady();
+    Neopixel::animate(currentMillis);
+    //Neopixel::animate2(currentMillis);
 
     if (Pwm::isAvailable() && Pwm::checkTrigger()) {
         i++;
         Pwm::disable();
         Dropper::drop(i);
-        delay(3000);
+        //delay(3000);
         Pwm::enable();
     }
     
+    delay(50);
 }
