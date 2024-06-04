@@ -6,6 +6,7 @@
 
 namespace Neopixel{
     void init();
-    void animate();
-    void update(const uint64_t timeMs);
+    void steady();
+    void animate(const uint64_t timeMs);
+    void animate2(const uint64_t timeMs);
 }   

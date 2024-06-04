@@ -30,8 +30,8 @@ void loop() {
     currentMillis = millis();
 
     //Neopixel::steady();
-    Neopixel::animate(currentMillis);
-    //Neopixel::animate2(currentMillis);
+    //Neopixel::animate(currentMillis);
+    Neopixel::animate2(currentMillis);
 
     if (Pwm::isAvailable() && Pwm::checkTrigger()) {
         i++;

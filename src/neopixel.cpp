@@ -194,6 +194,19 @@ void Neopixel::animate2(const uint64_t timeMs) {
                 state++;
                 prevTimeMs = timeMs;
                 pixNum = 0;
+                strip1.clear();
+                strip2.clear();
+                strip3.clear();
+                strip4.clear();
+                strip5.clear();
+                strip6.clear();
+
+                strip1.show();
+                strip2.show();
+                strip3.show();
+                strip4.show();
+                strip5.show();
+                strip6.show();
                 break;
             }
 
