@@ -31,7 +31,8 @@ void loop() {
 
     //Neopixel::steady();
     //Neopixel::animate(currentMillis);
-    Neopixel::animate2(currentMillis);
+    //Neopixel::animate2(currentMillis);
+    Neopixel::animate3(currentMillis);
 
     if (Pwm::isAvailable() && Pwm::checkTrigger()) {
         i++;
