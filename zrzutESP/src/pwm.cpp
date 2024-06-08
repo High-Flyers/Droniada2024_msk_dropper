@@ -24,6 +24,7 @@ void Pwm::disable() {
 }
 
 bool Pwm::checkTrigger() {
+    Serial.println(_val);
     return _flag;
 }
 
