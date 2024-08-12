@@ -10,8 +10,8 @@ volatile uint16_t _val = 0;
 volatile uint64_t _currentMicros = 0;
 volatile uint64_t _pulseStartMicros = 0;
 
-void IRAM_ATTR isrRising(void);
-void IRAM_ATTR isrFalling(void);
+void isrRising(void);
+void isrFalling(void);
 
 void Pwm::enable() {
     _flag = false;
@@ -24,6 +24,7 @@ void Pwm::disable() {
 }
 
 bool Pwm::checkTrigger() {
+    Serial.println(_val);
     return _flag;
 }
 
@@ -39,7 +40,7 @@ uint16_t Pwm::getUs() {
     return _val;
 }
 
-void IRAM_ATTR isrRising(void) {
+void isrRising(void) {
     // Rising edge. Start counting the pwm frame length
     _currentMicros = micros();
     _pulseStartMicros = _currentMicros;
@@ -49,7 +50,7 @@ void IRAM_ATTR isrRising(void) {
     attachInterrupt(_pin, isrFalling, FALLING);
 }
 
-void IRAM_ATTR isrFalling(void) {
+void isrFalling(void) {
     // Falling edge. Stop counting pwm frame length
     _currentMicros = micros();
     _val = _currentMicros - _pulseStartMicros;

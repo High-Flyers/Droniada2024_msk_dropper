@@ -1,17 +1,16 @@
 #pragma once
 
-// Pin definitions
+#define PWM_IN 13
 
-#define SERVO_1 25
-#define SERVO_2 26
-#define SERVO_3 33
-#define SERVO_4 32
+#define SERVO_1 2
+#define SERVO_2 3
+#define SERVO_3 5
+#define SERVO_4 9
 
-#define BEACON_1_DETECT 22 // SCL
-#define BEACON_2_DETECT 21 // SDA
-#define BEACON_3_DETECT 16 // RX
-#define BEACON_4_DETECT 17 // TX
+#define NEOPIXEL1 12
+#define NEOPIXEL2 14
+#define NEOPIXEL3 27
 
-#define PWM_IN 27
-
-#define NEOPIXEL 4
+#define NEOPIXEL4 5
+#define NEOPIXEL5 18
+#define NEOPIXEL6 19

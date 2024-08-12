@@ -4,5 +4,6 @@
 
 namespace Dropper {
     void attach();
-    void drop();
+    void arm();
+    void drop(uint8_t i);
 }
