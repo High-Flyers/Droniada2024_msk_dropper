@@ -1,9 +1,10 @@
 #include <Arduino.h>
 
 #include "dropper.h"
-//#include "pwm.h"
+#include "pwm.h"
 #include "params.h"
 #include "pins.h"
+#include "neopixel.h"
 
 uint8_t i = 0;
 
@@ -13,7 +14,7 @@ bool state = 0;
 uint64_t currentMillis = 0;
 
 void setup() {
-    pinMode(PWM_IN, INPUT_PULLUP);
+    //pinMode(PWM_IN, INPUT_PULLUP);
     Pwm::enable();
     Neopixel::init();
     Dropper::attach();
