@@ -1,16 +1,17 @@
 #pragma once
 
-#define PWM_IN 13
+#define PWM_IN 3
 
-#define SERVO_1 2
-#define SERVO_2 3
-#define SERVO_3 5
-#define SERVO_4 9
+#define SERVO_1 5
+#define SERVO_2 6
+#define SERVO_3 10
+#define SERVO_4 11
 
-#define NEOPIXEL1 12
-#define NEOPIXEL2 14
-#define NEOPIXEL3 27
+uint8_t mapServo[4] = {5, 6, 10, 11};
 
-#define NEOPIXEL4 5
-#define NEOPIXEL5 18
-#define NEOPIXEL6 19
+#define SW_1 7
+#define SW_2 8
+#define SW_3 9
+#define SW_4 12
+
+uint8_t mapSW[4] = {7, 8, 9, 12};

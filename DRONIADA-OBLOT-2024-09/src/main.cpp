@@ -1,41 +1,33 @@
 #include <Arduino.h>
-
 #include "dropper.h"
-#include "pwm.h"
 #include "params.h"
-#include "pins.h"
-#include "neopixel.h"
+//#include "pins.h"
 
 uint8_t i = 0;
-
-bool lastState = 0;
-bool state = 0;
-
-uint64_t currentMillis = 0;
+bool wait = 0;
 
 void setup() {
-    //pinMode(PWM_IN, INPUT_PULLUP);
-    Pwm::enable();
-    Neopixel::init();
-    Dropper::attach();
-    Dropper::arm();
     Serial.begin(9600);
+    Dropper::attach();
+    Dropper::openAll();
+    Serial.println("Begin");
 }
 
 void loop() {
-    
-    currentMillis = millis();
+    uint16_t _val = pulseIn(3, HIGH);	
+    Serial.println(_val);
 
-    Neopixel::animate3(currentMillis);
-
-    if (Pwm::isAvailable() && Pwm::checkTrigger()) {
-        i++;
-        Pwm::disable();
+    if (_val > 1500 && _val < 2100 && !wait) {
+        wait = !wait;
         Dropper::drop(i);
+        Serial.print("Dropped MSK: "); Serial.println(i);
+        i++;
         //delay(3000);
-        Pwm::enable();
     }
-    
+
+    if(_val > 800 && _val < 1200 && wait)
+        wait = !wait;
+
     delay(50);
 }
 
