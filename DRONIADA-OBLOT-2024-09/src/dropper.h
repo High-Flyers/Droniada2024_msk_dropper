@@ -7,8 +7,7 @@ namespace Dropper {
     void attach();
     void openAll();
     void check();
-    void drop(uint8_t i);
-    void openOne(Servo s, uint8_t n);
-    void closeOne(Servo s, uint8_t n);
-    void Dropper::closeMsk(uint8_t i);
+    void dropMsk(uint8_t i);
+    void moveOne(Servo s, uint8_t n, uint16_t POSITION);
+    void closeMsk(uint8_t i);
 }

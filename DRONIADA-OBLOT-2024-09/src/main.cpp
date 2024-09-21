@@ -16,10 +16,11 @@ void setup() {
 void loop() {
     uint16_t _val = pulseIn(3, HIGH);	
     Serial.println(_val);
+    Dropper::check();
 
     if (_val > 1500 && _val < 2100 && !wait) {
         wait = !wait;
-        Dropper::drop(i);
+        Dropper::dropMsk(i);
         Serial.print("Dropped MSK: "); Serial.println(i);
         i++;
         //delay(3000);
