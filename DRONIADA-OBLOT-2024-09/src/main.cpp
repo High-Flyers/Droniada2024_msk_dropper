@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "dropper.h"
 #include "params.h"
-//#include "pins.h"
+#include "pins.h"
 
 uint8_t i = 0;
 bool wait = 0;
@@ -14,7 +14,7 @@ void setup() {
 }
 
 void loop() {
-    uint16_t _val = pulseIn(3, HIGH);	
+    uint16_t _val = pulseIn(PWM_IN, HIGH);	
     Serial.println(_val);
     Dropper::check();
 
@@ -23,6 +23,8 @@ void loop() {
         Dropper::dropMsk(i);
         Serial.print("Dropped MSK: "); Serial.println(i);
         i++;
+        if (i >= 4)
+            i = 0;
         //delay(3000);
     }
 
