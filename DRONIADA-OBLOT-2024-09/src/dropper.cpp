@@ -5,7 +5,7 @@
 Servo _servo1, _servo2, _servo3, _servo4;
 bool mskState [4] = {0, 0, 0, 0}; 
 uint8_t d = 0;
-bool state = 0, lastState = 0;
+bool state = 0, lastState = 0, mission = 0;
 uint8_t mapServo[4] = {5, 6, 10, 11};
 uint8_t mapSW[4] = {7, 8, 9, 12};
 
@@ -81,12 +81,15 @@ void Dropper::closeMsk(uint8_t i) {
 }
 
 void Dropper::check(){
+    
+    if(mission) return;
+
     state = digitalRead(SW_4);
     if(state == 0 && lastState == 1){
         closeMsk(d);
         d++;
         if(d >= 4)
-            d = 0;
+            mission = 1;
     }
     lastState = state;
     //krancowki ?
