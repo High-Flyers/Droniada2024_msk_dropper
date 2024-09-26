@@ -5,9 +5,8 @@
 
 namespace Dropper {
     void attach();
-    void openAll();
+    void setAll(uint16_t POSITION);
     void check();
-    void dropMsk(uint8_t i);
-    void setServo(Servo s, uint8_t n, uint16_t POSITION);
-    void closeMsk(uint8_t i);
+    void setServo(Servo s, uint16_t POSITION);
+    void chooseServo(uint8_t i, uint16_t POSITION);
 }

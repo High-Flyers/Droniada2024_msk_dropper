@@ -3,13 +3,16 @@
 #include "pins.h"
 
 Servo _servo1, _servo2, _servo3, _servo4;
-bool mskState [4] = {0, 0, 0, 0}; 
+
 uint8_t d = 0;
-bool state = 0, lastState = 0, mission = 0;
 uint8_t mapServo[4] = {5, 6, 10, 11};
 uint8_t mapSW[4] = {7, 8, 9, 12};
 
-void Dropper::setServo(Servo s, uint8_t n, uint16_t POSITION){
+bool mskState [4] = {0, 0, 0, 0}; 
+bool state = 0, lastState = 0, mission = 0;
+
+//bez detachowania - zeby trzymalo MSK w komorze
+void Dropper::setServo(Servo s, uint16_t POSITION){
     //s.attach(n);
     s.writeMicroseconds(POSITION);
     delay(1000);
@@ -27,32 +30,34 @@ void Dropper::attach() {
     _servo3.attach(SERVO_3);
     _servo4.attach(SERVO_4);
 
+    //krancowki
     //pinMode(SW_1, INPUT_PULLUP);
     //pinMode(SW_2, INPUT_PULLUP); 
-    //pinMode(SW_3, INPUT_PULLUP);  
+    //pinMode(SW_3, INPUT_PULLUP); 
+    //guzik 
     pinMode(SW_4, INPUT); 
 }
 
-void Dropper::openAll(){
-    setServo(_servo1, SERVO_1, UNLOCKED_SERVO_US);
-    setServo(_servo2, SERVO_2, UNLOCKED_SERVO_US);
-    setServo(_servo3, SERVO_3, UNLOCKED_SERVO_US);
-    setServo(_servo4, SERVO_4, UNLOCKED_SERVO_US);
+void Dropper::setAll(uint16_t POSITION){
+    setServo(_servo1, POSITION);
+    setServo(_servo2, POSITION);
+    setServo(_servo3, POSITION);
+    setServo(_servo4, POSITION);
 }
 
-void Dropper::dropMsk(uint8_t i) {
+void Dropper::chooseServo(uint8_t i, uint16_t POSITION) {
     switch (i) {
         case 0:
-            setServo(_servo1, SERVO_1, UNLOCKED_SERVO_US);
+            setServo(_servo1, POSITION);
             break;
         case 1:
-            setServo(_servo2, SERVO_2, UNLOCKED_SERVO_US);
+            setServo(_servo2, POSITION);
             break;
         case 2:
-            setServo(_servo3, SERVO_3, UNLOCKED_SERVO_US);
+            setServo(_servo3, POSITION);
             break;
         case 3:
-            setServo(_servo4, SERVO_4, UNLOCKED_SERVO_US);
+            setServo(_servo4, POSITION);
             break;
         default:
             //log_e("No SwarmKillers present. Cannot drop...");
@@ -60,37 +65,30 @@ void Dropper::dropMsk(uint8_t i) {
     }
 }
 
-void Dropper::closeMsk(uint8_t i) {
-    switch (i) {
-        case 0:
-            setServo(_servo1, SERVO_1, LOCKED_SERVO_US);
-            break;
-        case 1:
-            setServo(_servo2, SERVO_2, LOCKED_SERVO_US);
-            break;
-        case 2:
-            setServo(_servo3, SERVO_3, LOCKED_SERVO_US);
-            break;
-        case 3:
-            setServo(_servo4, SERVO_4, LOCKED_SERVO_US);
-            break;
-        default:
-            //log_e("No SwarmKillers present. Cannot drop...");
-            break;
-    }
-}
 
 void Dropper::check(){
     
-    if(mission) return;
+    //jesli zamknieto wszystkie MSK - wyjdz z funkcji
+    if (mission) return;
 
     state = digitalRead(SW_4);
-    if(state == 0 && lastState == 1){
-        closeMsk(d);
+
+    //RISING_EDGE
+    if (state == 0 && lastState == 1) {
+        //1 nacisniecie - odblokuj komory
+        if (d == 0) {
+            setAll(UNLOCKED_SERVO_US);
+        }
+        //zamykaj po kolei 4 komory 
+        else {
+            chooseServo(d - 1, LOCKED_SERVO_US);
+            //po zamknieciu wszystkich komor - zablokuj funkcje
+            if (d >= 4)
+                mission = 1;
+        }
         d++;
-        if(d >= 4)
-            mission = 1;
     }
+    Serial.println("D: "); Serial.print(d);
     lastState = state;
     //krancowki ?
     /*
