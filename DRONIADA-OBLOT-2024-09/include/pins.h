@@ -13,3 +13,9 @@
 
 //SW4 - BUTTON
 #define SW_4 12
+
+#define NEOPIXELW1 14
+#define NEOPIXELW2 15
+#define NEOPIXELT  16
+
+#define LED_COUNT 32

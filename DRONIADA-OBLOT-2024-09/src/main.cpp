@@ -14,9 +14,9 @@ void setup() {
     Dropper::setAll(LOCKED_SERVO_US);
     //Serial.println("Begin");
     Neopixel::init();
-    Neopixel::show(stripW1, LED_COUNT, 255, 0, 0);
-    Neopixel::show(stripW2, LED_COUNT, 0, 255, 0);
-    Neopixel::show(stripT, LED_COUNT, 0, 0, 0);
+    Neopixel::show(0, LED_COUNT, 255, 0, 0);
+    Neopixel::show(1, LED_COUNT, 0, 255, 0);
+    Neopixel::show(2, LED_COUNT, 255, 255, 255);
 
 }
 
