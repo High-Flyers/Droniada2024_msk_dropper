@@ -2,6 +2,7 @@
 #include "dropper.h"
 #include "params.h"
 #include "pins.h"
+#include "neopixel.h"
 
 uint8_t i = 0;
 bool wait = 0;
@@ -12,6 +13,11 @@ void setup() {
     //w razie restartu - zablokuj
     Dropper::setAll(LOCKED_SERVO_US);
     //Serial.println("Begin");
+    Neopixel::init();
+    Neopixel::show(stripW1, LED_COUNT, 255, 0, 0);
+    Neopixel::show(stripW2, LED_COUNT, 0, 255, 0);
+    Neopixel::show(stripT, LED_COUNT, 0, 0, 0);
+
 }
 
 void loop() {
