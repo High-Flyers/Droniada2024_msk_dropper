@@ -7,16 +7,25 @@
 uint8_t i = 0;
 bool wait = 0;
 
+Adafruit_NeoPixel stripW1(LED_COUNT, NEOPIXELW1, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripW2(LED_COUNT, NEOPIXELW2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripT(LED_COUNT, NEOPIXELT, NEO_GRB + NEO_KHZ800);
+
+
 void setup() {
     Serial.begin(9600);
     Dropper::attach();
     //w razie restartu - zablokuj
     Dropper::setAll(LOCKED_SERVO_US);
     //Serial.println("Begin");
-    Neopixel::init();
-    Neopixel::show(0, LED_COUNT, 255, 0, 0);
-    Neopixel::show(1, LED_COUNT, 0, 255, 0);
-    Neopixel::show(2, LED_COUNT, 255, 255, 255);
+
+    Neopixel::init(stripW1);
+    Neopixel::init(stripW2);
+    Neopixel::init(stripT);
+
+    Neopixel::show(stripW1, LED_COUNT, 255, 0, 0);
+    Neopixel::show(stripW2, LED_COUNT, 0, 255, 0);
+    Neopixel::show(stripT, LED_COUNT, 255, 255, 255);
 
 }
 
